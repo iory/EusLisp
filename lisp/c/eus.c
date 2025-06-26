@@ -30,7 +30,11 @@ unsigned int thr_self() { return(1);}
 #include <malloc.h> // define mallopt, M_MMAP_MAX
 #endif
 #if Darwin
+#ifdef aarch64
+void *_end;
+#else
 int _end;
+#endif
 #endif
 
 /*variables*/

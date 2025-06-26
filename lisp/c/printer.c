@@ -210,10 +210,18 @@ pointer f;
     writestr(f,(byte *)work,len); }}
 
 static void printhex(val,f)
+#ifdef aarch64
+long val;
+#else
 int val;
+#endif
 pointer f;
 { char work[20];
+#ifdef aarch64
+  sprintf(work,"#x%lx",val);
+#else
   sprintf(work,"#x%x",val);
+#endif
   writestr(f,(byte *)work,strlen(work));}
 
 static void printratio(ctx,rat,f, base)
@@ -296,7 +304,11 @@ context *ctx;
   writestr(f,(byte *)"#<",2);
   printsym(ctx,class->c.cls.name,f);
   writech(f,' ');
-  printhex(obj,f);
+#ifdef aarch64
+  printhex((long)obj,f);
+#else
+  printhex((int)obj,f);
+#endif
   writech(f,'>');}
 
 static void printpkg(p,f)
@@ -359,7 +371,11 @@ int prlevel;
 	  break;
     case ELM_BYTE:
 	  writestr(f,(byte *)"#<bytecode ",11);
-	  printhex(vec,f);
+#ifdef aarch64
+	  printhex((long)vec,f);
+#else
+	  printhex((int)vec,f);
+#endif
 	  writech(f,'>');
 	  break;
     case ELM_CHAR:
@@ -385,7 +401,7 @@ int prlevel;
 	  break;
     case ELM_FOREIGN:
 	  writestr(f,(byte *)"#u",2);
-	  printstr(ctx,vecsize(vec),vec->c.ivec.iv[0],f);
+	  printstr(ctx,vecsize(vec),(byte *)vec->c.ivec.iv[0],f);
 	  break;
     default:
 	  if (classof(vec)==C_VECTOR)  writestr(f,(byte *)"#(",2);

@@ -38,8 +38,8 @@ else
 CC += -fPIC
 endif
 ifeq ($(ARCHDIR), Darwin)
-CC += -I/opt/local/lib/jpeg6b/include -I/opt/local/include
-LD += -L/opt/local/lib/jpeg6b/lib     -L/opt/local/lib
+CC += -I/opt/local/lib/jpeg6b/include -I/opt/local/include -I/opt/homebrew/include -I/usr/local/include
+LD += -L/opt/local/lib/jpeg6b/lib     -L/opt/local/lib -L/opt/homebrew/lib -L/usr/local/lib
 endif
 ifeq ($(ARCHDIR), LinuxARM)
 CC += -fPIC
