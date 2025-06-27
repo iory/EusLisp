@@ -234,7 +234,7 @@ jobs:
           export TRAVIS_OS_NAME=osx
           export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
           export LC_CTYPE=C
-          (cd ${HOME}; git clone --depth 1 http://github.com/euslisp/jskeus jskeus)
+          (cd ${HOME}; git clone --depth 1 http://github.com/iory/jskeus -b apple-silicon jskeus)
           (cd ${HOME}/jskeus; patch -f -p1 < ${CI_SOURCE_PATH}/.github/workflows/fix-dylib-location.patch || echo "OK")
           sed -i '.bak' 's/history/_history/' ${CI_SOURCE_PATH}/lisp/l/eusstart.l
           bash -x ./.travis.sh
