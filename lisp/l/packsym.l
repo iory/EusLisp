@@ -165,7 +165,7 @@
 	(cond ((eq sym 0) (return-from :find nil))
 	      ((eq sym 1) #|deleted mark -- do nothing|# )
 	      ((equal (sym . pname) (s . pname)) (return-from :find (mod hash size))))
-	(if (>= (setq hash (1+ hash)) (* 2 size)) (error "can not find ~a in this package" sym)))
+	(if (>= (setq hash (1+ hash)) (* 2 size)) (error "can not find ~a in this package" s)))
       nil))
  (:shadow (sym)
       (when (null (send self :find sym))
