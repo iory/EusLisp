@@ -12,7 +12,8 @@ int export_all;
 
 int rehash(str)
 register pointer str;	/*string object*/
-{ register int i,l,hash;
+{ register int i,l;
+  register unsigned int hash;
   register byte *id;
   id=str->c.str.chars;
   l=vecsize(str);
@@ -25,7 +26,8 @@ byte *id;
 int l,*hashval;
 register pointer symvec;
 { register pointer sym,pnam;
-  register int i,size,hash=l,flag=0;
+  register int i,size,flag=0;
+  register unsigned int hash=l;
   for (i=0; i<l; i++) hash+=(hash<<2)+id[i];
   hash&=0x1fffffff;
   size=vecsize(symvec);
